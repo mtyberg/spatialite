@@ -1,0 +1,9 @@
+[submodule "deps/proj4"]
+	path = deps/proj4
+	url = https://github.com/OSGeo/proj.4.git
+[submodule "deps/sqlite3"]
+	path = deps/sqlite3
+	url = https://github.com/alex85k/sqlite3-cmake.git
+[submodule "deps/geos"]
+	path = deps/geos
+	url = https://github.com/libgeos/libgeos.git
