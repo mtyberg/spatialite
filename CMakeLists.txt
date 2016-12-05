@@ -13,6 +13,10 @@ endif(CCACHE_FOUND)
 project(spatialite)
 set(NAME spatialite)
 
+if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_compile_options(-Wno-error=uninitialized -Wno-error=implicit-function-declaration -Wno-error=int-to-void-pointer-cast -Wno-error=unused-parameter -Wno-error=unused-variable -Wno-error=self-assign -Wno-error=unused-parameter -Wno-error=sometimes-uninitialized -Wno-error=logical-not-parentheses -Wno-error=unused-function)
+endif ()
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Parameters
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,6 +87,19 @@ endmacro(lhs_target_configure_warnings)
 # Sources and headers
 file(GLOB_RECURSE headers "${HEADERS_PATH}/*.h")
 file(GLOB_RECURSE sources "${SOURCES_PATH}/*.c")
+file(GLOB_RECURSE sources_versioninfo "${PROJECT_SOURCE_DIR}/src/versioninfo/*.c")
+file(GLOB_RECURSE sources_connectonCache "${PROJECT_SOURCE_DIR}/src/connection_cache/*.c")
+file(GLOB_RECURSE sources_dxf "${PROJECT_SOURCE_DIR}/src/dxf/*.c")
+file(GLOB_RECURSE sources_shapefiles "${PROJECT_SOURCE_DIR}/src/shapefiles/*.c")
+file(GLOB_RECURSE sources_spatialite "${PROJECT_SOURCE_DIR}/src/spatialite/*.c")
+file(GLOB_RECURSE sources_gaiaaux "${PROJECT_SOURCE_DIR}/src/gaiaaux/*.c")
+file(GLOB_RECURSE sources_gaiaexif "${PROJECT_SOURCE_DIR}/src/gaiaexif/*.c")
+file(GLOB_RECURSE sources_gaiageo "${PROJECT_SOURCE_DIR}/src/gaiageo/gg_*.c")
+file(GLOB_RECURSE sources_geopackage "${PROJECT_SOURCE_DIR}/src/geopackage/*.c")
+file(GLOB_RECURSE sources_md5 "${PROJECT_SOURCE_DIR}/src/md5/*.c")
+file(GLOB sources_srsinit "${PROJECT_SOURCE_DIR}/src/srsinit/*.c")
+file(GLOB_RECURSE sources_virtualtext "${PROJECT_SOURCE_DIR}/src/virtualtext/*.c")
+file(GLOB_RECURSE sources_wfs "${PROJECT_SOURCE_DIR}/src/wfs/*.c")
 
 # Library parameters
 set(TF_FRAMEWORK_VERSION "A")
@@ -108,6 +125,19 @@ add_library(${NAME}
         SHARED
         ${headers}
         ${sources}
+        ${sources_versioninfo}
+        ${sources_connectonCache}
+        ${sources_dxf}
+        ${sources_shapefiles}
+        ${sources_spatialite}
+        ${sources_gaiaaux}
+        ${sources_gaiaexif}
+        ${sources_gaiageo}
+        ${sources_geopackage}
+        ${sources_md5}
+        ${sources_srsinit}
+        ${sources_virtualtext}
+        ${sources_wfs}
         ${resources}
         )
 
@@ -120,23 +150,28 @@ lhs_target_configure_warnings(${NAME})
 # Make full path includes work for project headers
 include_directories(${HEADERS_PATH})
 include_directories(${PROJECT_SOURCE_DIR})
+
 target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 
+find_package(LibXml2 REQUIRED)
+include_directories(${LIBXML2_INCLUDE_DIR})
+target_link_libraries(${NAME} ${LIBXML2_LIBRARIES})
+
 # Link dependencies
-#target_link_libraries(${NAME} Boost)
+target_link_libraries (${NAME} geos)
+target_link_libraries (${NAME} geos_c)
+target_link_libraries (${NAME} proj)
+target_link_libraries (${NAME} sqlite3)
 
-
-#target_link_libraries (${NAME} RapidJSON)
-#target_link_libraries (${NAME} RapidXml)
-#target_link_libraries (${NAME} YARD)
-#target_link_libraries (${NAME} PEGTL)
-#target_link_libraries (${NAME} lhs.dtp)
-#add_dependencies(${NAME} RapidJSON)
+find_library(Iconv_LIBRARY Iconv)
+target_link_libraries(${NAME} ${Iconv_LIBRARY})
+find_package(ZLIB REQUIRED)
+target_link_libraries(${NAME} ${ZLIB_LIBRARIES})
 
 target_compile_features(${NAME} PUBLIC cxx_strong_enums)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Dependencies
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#add_subdirectory(${DEPENDENCIES_RELATIVE_PATH})
+add_subdirectory(${DEPENDENCIES_RELATIVE_PATH})
 
