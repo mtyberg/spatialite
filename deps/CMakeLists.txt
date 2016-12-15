@@ -30,6 +30,8 @@ target_include_directories(${NAME} PUBLIC ${GEOS_HEADERS_PATH})
 # proj4
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 set(USE_THREAD OFF CACHE BOOL " ")
+set(BUILD_LIBPROJ_SHARED OFF CACHE BOOL " ")
+set(PROJ4_TESTS OFF CACHE BOOL " ")
 add_subdirectory(proj4 proj4)
 set(PROJ_HEADERS_PATH "proj4/src")
 target_include_directories(${NAME} PUBLIC ${PROJ_HEADERS_PATH})
