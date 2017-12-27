@@ -13,18 +13,12 @@ endif ()
 set(DEPENDENCIES_PATH ${CMAKE_CURRENT_LIST_DIR})
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Catch Unit Tests lib
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#add_library(Catch INTERFACE)
-#set(CATCH_INCLUDE_DIR "${DEPENDENCIES_PATH}/catch/single_include")
-#target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # geos
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 add_subdirectory(geos geos)
 set(GEOS_HEADERS_PATH "geos/include/")
-target_include_directories(${NAME} PUBLIC ${GEOS_HEADERS_PATH})
+set(GEOS_C_HEADERS_PATH "geos/capi/")
+target_include_directories(${NAME} PUBLIC ${GEOS_HEADERS_PATH} ${GEOS_C_HEADERS_PATH})
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # proj4

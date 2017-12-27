@@ -122,7 +122,7 @@ message("LIB_INSTALL_DIR: ${LIB_INSTALL_DIR}")
 
 # Define the lib
 add_library(${NAME}
-        SHARED
+        STATIC
         ${headers}
         ${sources}
         ${sources_versioninfo}
@@ -175,3 +175,4 @@ target_compile_features(${NAME} PUBLIC cxx_strong_enums)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 add_subdirectory(${DEPENDENCIES_RELATIVE_PATH})
 
+add_subdirectory(examples)
