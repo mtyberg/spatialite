@@ -59,14 +59,6 @@ the terms of any one of the MPL, the GPL or the LGPL.
 #include <spatialite/sqlite.h>
 #include <spatialite/gaiageo.h>
 
-#if defined(_WIN32) && !defined(__MINGW32__)
-static double
-rint (double x)
-{
-    return floor (x + 0.5);
-}
-#endif
-
 static void
 auxGridSnapPoint (int dimension_model, gaiaPointPtr pt, gaiaGeomCollPtr result,
 		  double origin_x, double origin_y, double origin_z,

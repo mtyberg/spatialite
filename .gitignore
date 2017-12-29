@@ -51,3 +51,4 @@ test/sql_stmt_security_tests/Makefile
 test/sql_stmt_tests/Makefile
 test/sql_stmt_xmlsec_tests/Makefile
 .idea
+VS2015/

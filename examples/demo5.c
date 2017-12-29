@@ -27,6 +27,10 @@ SQLite/SpatiaLite
 #include <spatialite/gaiageo.h>
 #include <spatialite.h>
 
+#ifdef _WIN32
+#define strcasecmp	_stricmp
+#endif /* not WIN32 */
+
 #define ARG_NONE	0
 #define ARG_DB_PATH	1
 #define ARG_TABLE	2

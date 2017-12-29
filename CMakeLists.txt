@@ -15,6 +15,8 @@ set(NAME spatialite)
 
 if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     add_compile_options(-Wno-error=uninitialized -Wno-error=implicit-function-declaration -Wno-error=int-to-void-pointer-cast -Wno-error=unused-parameter -Wno-error=unused-variable -Wno-error=self-assign -Wno-error=unused-parameter -Wno-error=sometimes-uninitialized -Wno-error=logical-not-parentheses -Wno-error=unused-function)
+else()
+	add_definitions(-DYY_NO_UNISTD_H)
 endif ()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,6 +121,10 @@ math(EXPR TF_SOVERSION_PATCH "${TF_SOVERSION_REVISION}")
 set(TF_SOVERSION ${TF_SOVERSION_MAJOR}.${TF_SOVERSION_MINOR}.${TF_SOVERSION_PATCH})
 
 message("LIB_INSTALL_DIR: ${LIB_INSTALL_DIR}")
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+	configure_file(${PROJECT_SOURCE_DIR}/config-msvc.h ${PROJECT_SOURCE_DIR}/config.h @ONLY)
+endif()
 
 # Define the lib
 add_library(${NAME}
