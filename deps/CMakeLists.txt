@@ -16,6 +16,7 @@ set(DEPENDENCIES_PATH ${CMAKE_CURRENT_LIST_DIR})
 # geos
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 add_subdirectory(geos geos)
+set(GEOS_BUILD_SHARED OFF CACHE BOOL " ")
 set(GEOS_HEADERS_PATH "geos/include/")
 set(GEOS_C_HEADERS_PATH "geos/capi/")
 target_include_directories(${NAME} PUBLIC ${GEOS_HEADERS_PATH} ${GEOS_C_HEADERS_PATH})
@@ -35,4 +36,16 @@ target_include_directories(${NAME} PUBLIC ${PROJ_HEADERS_PATH})
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 add_subdirectory(sqlite3 sqlite3)
 
+if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC"))
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# zlib
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+add_subdirectory(zlib zlib)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# iconv
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+add_subdirectory(libiconv iconv)
+
+endif()
 

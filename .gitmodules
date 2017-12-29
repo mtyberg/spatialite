@@ -7,3 +7,6 @@
 [submodule "deps/geos"]
 	path = deps/geos
 	url = https://github.com/libgeos/libgeos.git
+[submodule "deps/libiconv"]
+	path = deps/libiconv
+	url = https://github.com/vovythevov/libiconv-cmake.git
