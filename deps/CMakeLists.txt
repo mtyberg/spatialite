@@ -55,8 +55,17 @@ target_include_directories(${NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/zlib")
 # iconv
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 add_definitions(-DICONV_CONST=const)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL " ")
 add_subdirectory(libiconv iconv)
 target_include_directories(${NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/iconv")
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# xml2
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+add_subdirectory(libxml2 libxml2)
+target_include_directories(libxml2 PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/iconv")
+target_include_directories(libxml2 PUBLIC ${ZLIB_HEADERS_PATH})
+target_include_directories(libxml2 PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/zlib")
 
 endif()
 

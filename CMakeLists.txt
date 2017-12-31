@@ -159,10 +159,6 @@ include_directories(${PROJECT_SOURCE_DIR})
 
 target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 
-find_package(LibXml2 REQUIRED)
-include_directories(${LIBXML2_INCLUDE_DIR})
-target_link_libraries(${NAME} ${LIBXML2_LIBRARIES})
-
 # Link dependencies
 target_link_libraries (${NAME} geos-static)
 target_link_libraries (${NAME} geos_c)
@@ -172,9 +168,15 @@ target_link_libraries (${NAME} sqlite3)
 if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC"))
     target_link_libraries (${NAME} zlibstatic)
     target_link_libraries (${NAME} libiconv)
+    target_link_libraries(${NAME} libxml2)
 else()
+    find_package(LibXml2 REQUIRED)
+    include_directories(${LIBXML2_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${LIBXML2_LIBRARIES})
+
     find_package(ZLIB REQUIRED)
     target_link_libraries(${NAME} ${ZLIB_LIBRARIES})
+
     find_library(Iconv_LIBRARY Iconv)
     target_link_libraries(${NAME} ${Iconv_LIBRARY})
 endif()
