@@ -24,6 +24,7 @@ set(GEOS_BUILD_SHARED OFF CACHE BOOL " ")
 set(GEOS_HEADERS_PATH "geos/include/")
 set(GEOS_C_HEADERS_PATH "geos/capi/")
 target_include_directories(${NAME} PUBLIC ${GEOS_HEADERS_PATH} ${GEOS_C_HEADERS_PATH})
+target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/geos/capi)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # proj4
