@@ -24,6 +24,7 @@ option(ENABLE_LIBXML2 "Enable libxml2" ON)
 option(HAVE_LIBSQLITE3 "Enable libsqlite3" ON)
 option(OMIT_FREEXL "Omit Freexl" ON)
 option(GEOS_ADVANCED "Enable Geo Advanced" ON)
+option(OMIT_GEOCALLBACKS "OMIT GEOCALLBACKS" ON)
 option(HAVE_ICONV_H "Enable iconv" ON)
 option(HAVE_LIBZ "Enable libz" ON)
 option(VERSION "Enable VERSION" ON)
@@ -212,7 +213,8 @@ include_directories(${PROJECT_SOURCE_DIR})
 target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 
 # Link dependencies
-target_link_libraries (${NAME} geos-static)
+target_link_libraries (${NAME} geos)
+target_link_libraries (${NAME} geos_c)
 target_link_libraries (${NAME} proj)
 target_link_libraries (${NAME} sqlite3)
 
