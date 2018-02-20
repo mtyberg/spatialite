@@ -213,7 +213,6 @@ target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 
 # Link dependencies
 target_link_libraries (${NAME} geos-static)
-target_link_libraries (${NAME} geos_c)
 target_link_libraries (${NAME} proj)
 target_link_libraries (${NAME} sqlite3)
 
