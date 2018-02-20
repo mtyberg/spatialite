@@ -6,7 +6,7 @@
 	url = https://github.com/alex85k/sqlite3-cmake.git
 [submodule "deps/geos"]
 	path = deps/geos
-	url = https://github.com/libgeos/libgeos.git
+	url=https://github.com/mtyberg/geos
 [submodule "deps/libiconv"]
 	path = deps/libiconv
 	url = https://github.com/vovythevov/libiconv-cmake.git
