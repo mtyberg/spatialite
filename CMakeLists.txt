@@ -118,10 +118,8 @@ SET(CMAKE_POLICY_DEFAULT_CMP0042 NEW) # RPATH
 macro(lhs_target_configure_warnings ARG_TARGET_NAME)
   if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
     # using Clang
-    set_property(TARGET ${ARG_TARGET_NAME} APPEND_STRING PROPERTY COMPILE_FLAGS " -Wall -Wextra -Werror")
   elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     # using GCC
-    set_property(TARGET ${ARG_TARGET_NAME} APPEND_STRING PROPERTY COMPILE_FLAGS " -Wall -Wextra -Werror")
   elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
     # using Intel C++
   elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
