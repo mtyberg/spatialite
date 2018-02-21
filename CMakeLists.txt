@@ -19,6 +19,10 @@ else()
 	add_definitions(-DYY_NO_UNISTD_H)
 endif ()
 
+if (APPLE AND IOS)
+    add_definitions(-DAPPLE_IOS)
+endif()
+
 option(ENABLE_GEOPACKAGE "Enable GeoPackage" ON)
 option(ENABLE_LIBXML2 "Enable libxml2" ON)
 option(HAVE_LIBSQLITE3 "Enable libsqlite3" ON)

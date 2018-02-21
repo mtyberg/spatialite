@@ -71,7 +71,7 @@ extern const char *locale_charset (void);
 #include <localcharset.h>
 #endif /* end localcharset */
 #else /* not MINGW32 */
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if !defined(APPLE_IOS) && (defined(__APPLE__) || defined(__ANDROID__))
 #include <iconv.h>
 #include <localcharset.h>
 #else /* neither Mac OsX nor Android */
