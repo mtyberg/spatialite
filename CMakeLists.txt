@@ -176,11 +176,11 @@ set(TF_SOVERSION ${TF_SOVERSION_MAJOR}.${TF_SOVERSION_MINOR}.${TF_SOVERSION_PATC
 
 message("LIB_INSTALL_DIR: ${LIB_INSTALL_DIR}")
 
-message(STATUS "Generating Spatialite ${PROJECT_SOURCE_DIR}/config.h")
-configure_file(${PROJECT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
-
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-	configure_file(${PROJECT_SOURCE_DIR}/config-msvc.h ${${CMAKE_CURRENT_BINARY_DIR}}/config.h @ONLY)
+    configure_file(${PROJECT_SOURCE_DIR}/config-msvc.h ${${CMAKE_CURRENT_BINARY_DIR}}/config.h @ONLY)
+else()
+    message(STATUS "Generating Spatialite ${PROJECT_SOURCE_DIR}/config.h")
+    configure_file(${PROJECT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 endif()
 
 # Define the lib
