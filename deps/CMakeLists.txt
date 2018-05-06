@@ -28,16 +28,16 @@ target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/geos/capi)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # proj4
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~
-if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC"))
-	set(CMAKE_USE_WIN32_THREADS_INIT ON CACHE BOOL " ")
-else()
-	set(CMAKE_USE_PTHREADS_INIT ON CACHE BOOL " ")
-endif()
-set(USE_THREAD TRUE)
-set(Threads_FOUND TRUE)
+set(USE_THREAD OFF CACHE BOOL " ")
 set(BUILD_LIBPROJ_SHARED OFF CACHE BOOL " ")
 set(PROJ4_TESTS OFF CACHE BOOL " ")
 add_subdirectory(proj4 proj4)
+remove_definitions(-DMUTEX_stub)
+if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC"))
+	add_definitions( -DMUTEX_win32)
+else()
+	add_definitions( -DMUTEX_pthread)
+endif()
 set(PROJ_HEADERS_PATH "proj4/src")
 target_include_directories(${NAME} PUBLIC ${PROJ_HEADERS_PATH})
 
