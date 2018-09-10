@@ -88,7 +88,7 @@ gaiaGetLocaleCharset ()
 #if defined(__MINGW32__) || defined(_WIN32)
     return locale_charset ();
 #else /* not MINGW32 - WIN32 */
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if !defined(APPLE_IOS) && defined(__APPLE__) || defined(__ANDROID__)
     return locale_charset ();
 #else /* neither Mac OsX nor Android */
     return nl_langinfo (CODESET);
